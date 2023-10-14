@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=0.9">
+    <title>Sketchpad</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="sketchpad.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div class="main">
+        <h1 class="title">Sketchpad</h1>
+        <div class="user-form">
+            <form action="submit" id="user-form">
+                <div>
+                    <label for="username">Name: </label>
+                    <input id="username" type="name" placeholder="James" />
+                </div>
+                <button type="submit" form="user-form">Start</button>
+            </form>
+        </div>
+        <div class="user-logged-in" id="user-container">
+            <p class="welcome-message">Welcome <span id="username-placeholder"></span></p>
+            <p class="user-instructions">Please draw a <span id="draw-placeholder">House</span></p>
+            <hr>
+        </div>
+        <div class="canvas-container"></div>
+        <div class="actions">
+            <button id="undo-btn" disabled>Undo</button>
+            <button id="clear-btn" disabled>Clear</button>
+            <button id="sketch-submit-btn" disabled>Submit</button>
+        </div>
+    </div>
+</body>
+
+</html>
