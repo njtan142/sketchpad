@@ -104,8 +104,8 @@ class Sketchpad {
     #getMouse(event) {
         var rect = this.canvas.getBoundingClientRect();
         return [
-            event.clientX - rect.left,
-            event.clientY - rect.top
+            Math.round(event.clientX - rect.left),
+            Math.round(event.clientY - rect.top)
         ];
     }
 
