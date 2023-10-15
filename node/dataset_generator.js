@@ -1,16 +1,19 @@
-const constants = require('./constants.js');
+const constants = require('../common/constants.js');
 const fs = require('fs');
 const draw = require('../common/draw.js')
-const { createCanvas } = require('canvas');
 
 
 const generateSamples = () => {
     const filenames = fs.readdirSync(constants.RAW_DIRECTORY)
     const samples = []
     let id = 1;
+    const progress_additionals = 2;
 
+    const { createCanvas } = require('canvas');
     const canvas = createCanvas(400, 400);
     const context = canvas.getContext('2d');
+
+    const utils = require('../common/utils.js')
 
     filenames.forEach(filename => {
         const content = fs.readFileSync(
@@ -36,6 +39,7 @@ const generateSamples = () => {
                 constants.IMAGES_DIRECTORY + '/' + id + '.png',
                 paths
             )
+            utils.printProgress(id, filenames.length * 8 + progress_additionals)
             id++
         }
     })
@@ -44,6 +48,15 @@ const generateSamples = () => {
         constants.SAMPLES_DIRECTORY,
         JSON.stringify(samples)
     )
+    utils.printProgress(id, filenames.length * 8 + progress_additionals)
+
+    fs.writeFileSync(
+        constants.SAMPLESJS_DIRECTORY,
+        "const samples = " + JSON.stringify(samples)
+    )
+    utils.printProgress(id+1, filenames.length * 8 + progress_additionals)
+
+    utils.printMessageWithNewLineBeforeAndAfter("Dataset processing done!")
 }
 
 const generateImageFile = (canvas, context, filepath, drawing) => {

@@ -7,7 +7,9 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
+    max-height: 100vh;
     background-color: #f6f6f6;
+    overflow: hidden;
     overflow-y: scroll;
 }
 
@@ -20,17 +22,61 @@ button {
     cursor: pointer;
 }
 
-button:hover{
+button:hover {
     transform: scale(1.2);
     transition: 10ms;
 }
 
 .main {
+    position: relative;
+
     padding: 1em 3em;
     background-color: #fffcfc;
     border-radius: 10px;
     box-shadow: 6px 6px 12px #c7c5c5,
         -6px -6px 12px #ffffff;
+}
+
+.dataset-viewer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1em 0em 1em 0em;
+    margin: 0em 1em 10px 0em;
+
+    background-color: #fffcfc;
+    border-radius: 10px;
+    box-shadow: 6px 6px 12px #c7c5c5,
+        -6px -6px 12px #ffffff;
+
+
+}
+
+#link {
+    --border-color: #fc531658;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--border-color) 50%, transparent 50%),
+        linear-gradient(90deg, var(--border-color) 50%, transparent 50%),
+        linear-gradient(0deg, var(--border-color) 50%, transparent 50%),
+        linear-gradient(0deg, var(--border-color) 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 8px 2px, 8px 2px, 2px 8px, 2px 8px;
+    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    border-radius: 5px;
+    padding: 1em;
+    animation: dash 2.5s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;
+    }
+}
+
+.dataset-viewer>a {
+    color: #fc5416;
+    text-decoration: none;
 }
 
 h1 {
@@ -53,22 +99,22 @@ form button {
     padding: 10px 1em;
 }
 
-#username-placeholder{
+#username-placeholder {
     color: rgb(0, 183, 255);
 }
 
-.user-logged-in{
+.user-logged-in {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.user-instructions{
+.user-instructions {
     font-weight: bold;
 }
 
-.user-logged-in > hr{
+.user-logged-in>hr {
     width: 50%;
     margin-bottom: 1em;
     margin-top: -1em;
@@ -98,7 +144,7 @@ form button {
     padding: 10px 2em;
 }
 
-.actions button:disabled{
+.actions button:disabled {
     text-decoration: line-through;
     opacity: 50%;
 }

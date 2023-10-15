@@ -6,7 +6,10 @@ constants.DATASET_DIRECTORY = constants.DATA_DIRECTORY + "/dataset"
 constants.JSON_DIRECTORY = constants.DATASET_DIRECTORY + "/json"
 constants.IMAGES_DIRECTORY = constants.DATASET_DIRECTORY + "/images"
 constants.SAMPLES_DIRECTORY = constants.DATASET_DIRECTORY + "/samples.json"
+constants.JSOBJECTS_DIRECTORY = "../common/js_objects"
+constants.SAMPLESJS_DIRECTORY = constants.JSOBJECTS_DIRECTORY + "/samples.js"
 
 
-
-module.exports = constants
+if(typeof module !== undefined){
+    module.exports = constants
+}
