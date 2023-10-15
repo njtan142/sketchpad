@@ -8,4 +8,4 @@ constants.IMAGES_DIRECTORY = constants.DATASET_DIRECTORY + "/images"
 
 
 
-module.exports = {constants}
+module.exports = constants
