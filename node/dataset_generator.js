@@ -1,10 +1,17 @@
 const constants = require('./constants.js');
 const fs = require('fs');
+const draw = require('../common/draw.js')
+const { createCanvas } = require('canvas');
+
 
 const generateSamples = () => {
     const filenames = fs.readdirSync(constants.RAW_DIRECTORY)
     const samples = []
     let id = 1;
+
+    const canvas = createCanvas(400, 400);
+    const context = canvas.getContext('2d');
+
     filenames.forEach(filename => {
         const content = fs.readFileSync(
             constants.RAW_DIRECTORY + "/" + filename
@@ -19,12 +26,15 @@ const generateSamples = () => {
             }
             samples.push(sample)
 
-
             const paths = drawings[label]
-            fs.writeFileSync(
+            fs.writeFileSync( //json
                 constants.JSON_DIRECTORY + "/" + id + ".json",
-                JSON.stringify(paths
-                    )
+                JSON.stringify(paths)
+            )
+            generateImageFile(
+                canvas, context,
+                constants.IMAGES_DIRECTORY + '/' + id + '.png',
+                paths
             )
             id++
         }
@@ -35,5 +45,14 @@ const generateSamples = () => {
         JSON.stringify(samples)
     )
 }
-console.log(constants)
+
+const generateImageFile = (canvas, context, filepath, drawing) => {
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    draw.paths(context, drawing)
+
+    const buffer = canvas.toBuffer("image/png")
+    fs.writeFileSync(filepath, buffer)
+}
+
 generateSamples();
