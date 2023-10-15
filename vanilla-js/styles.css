@@ -79,6 +79,7 @@ form button {
 .canvas-container {
     width: 400px;
     height: 400px;
+    overflow: hidden;
 
     /* box shadow */
     border-radius: 50px;

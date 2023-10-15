@@ -1,19 +1,30 @@
-let user = ""
-let drawings = []
+let index = 0;
+const labels = ["car", "fish", "house", "tree",
+    "bicycle", "guitar", "pencil", "clock"];
+
+const data = {
+    student: null,
+    session: new Date().getTime(),
+    drawings: {}
+};
+
+// Containers
 let userLoggedIn = document.getElementById("user-container")
 console
-
 let form = document.getElementById("user-form")
 let canvasContainer = document.getElementsByClassName("canvas-container")[0]
 let sketchpad;
 
+// Buttons
+let undoButton = document.getElementById('undo-btn');
+let clearButton = document.getElementById('clear-btn');
+let submitButton = document.getElementById("sketch-submit-btn")
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     let name = document.getElementById("username").value;
     if (name == "") {
         name = "James"
-        user = name;
     }
 
     data.student = name;
@@ -34,12 +45,8 @@ const hideUserLog = () => {
     userLoggedIn.style.height = "0px";
 }
 
-hideUserLog();
 
 const initSketchPad = () => {
-    let undoButton = document.getElementById('undo-btn');
-    let clearButton = document.getElementById('clear-btn');
-    let submitButton = document.getElementById("sketch-submit-btn")
     sketchpad = new Sketchpad(canvasContainer, 400, [undoButton, clearButton, submitButton])
 }
 
@@ -49,29 +56,15 @@ const updateInstructions = () => {
 }
 
 const disableActions = () => {
-    let undoButton = document.getElementById('undo-btn');
-    let clearButton = document.getElementById('clear-btn');
-    let submitButton = document.getElementById("sketch-submit-btn")
+
     undoButton.disabled = true;
     clearButton.disabled = true;
     submitButton.disabled = true;
 }
-disableActions();
-
-// The data collection starts here 
-
-let index = 0;
-const labels = ["car", "fish", "house", "tree",
-    "bicycle", "guitar", "pencil", "clock"];
-
-const data = {
-    student: null,
-    session: new Date().getTime(),
-    drawings: {}
-};
 
 
-let submitButton = document.getElementById("sketch-submit-btn")
+// The data collection functions
+
 submitButton.addEventListener("click", () => {
     data.drawings[labels[index]] = sketchpad.paths
     console.log(data)
@@ -103,3 +96,7 @@ const saveData = () => {
 
     alert("Your data is now saved, thank you " + data.student + " for participating!")
 }
+
+
+hideUserLog();
+disableActions();
