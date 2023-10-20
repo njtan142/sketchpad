@@ -32,6 +32,8 @@ const populateWithImages = (container, contents) => {
 }
 
 
+const {samples, featuresNames} = features;
+
 const groups = utils.groupDatasetBy('student_id', samples)
 const dataContainer = document.getElementById('dataset-container')
 for (let id in groups) {
